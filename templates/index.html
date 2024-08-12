@@ -1,21 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosis Result</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symptom Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .box {
+      width: 400px;
+      padding: 40px;
+      background-color: #e0f7fa;
+      border: 2px solid #00796b;
+      border-radius: 10px;
+      margin: 100px auto;
+      text-align: center;
+    }
+    h1 {
+      color: #00796b;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #00796b;
+      font-weight: bold;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      border: 1px solid #00796b;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: none;
+      margin-bottom: 20px;
+    }
+    input[type="submit"] {
+      background-color: #00796b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #004d40;
+    }
+    .result {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .result h2 {
+      color: #00796b;
+    }
+    .error {
+      color: red;
+    }
+    a {
+      color: #00796b;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <h1>Diagnosis Result</h1>
-    
-    {% if disease %}
-        <h2>Most Probable Disease: {{ disease }}</h2>
-        <p>Recommended Remedies: {{ remedy }}</p>
-    {% elif error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
 
-    <br>
-    <a href="/">Go back</a>
+<div class="box">
+  <h1>Symptom Checker</h1>
+  <form method="POST" action="/">
+    <label for="symptoms">Enter your symptoms:</label>
+    <textarea id="symptoms" name="symptoms" placeholder="e.g., headache, fever, cough" required></textarea><br>
+    <input type="submit" value="Check">
+  </form>
+
+  {% if disease %}
+    <div class="result">
+      <h2>Most Probable Disease: {{ disease }}</h2>
+      <p><strong>Recommended Remedies:</strong> {{ remedy }}</p>
+    </div>
+  {% elif error %}
+    <div class="result">
+      <p class="error">{{ error }}</p>
+    </div>
+  {% endif %}
+
+</div>
+
 </body>
 </html>
