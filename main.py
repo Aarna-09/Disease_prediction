@@ -13,7 +13,7 @@ medicine_data = pd.read_csv('medicine.csv')
 def match_symptoms(input_symptoms):
     vectorizer = CountVectorizer().fit(symptom_data.columns[1:])
     symptom_vector = vectorizer.transform([input_symptoms])
-    max_similarity = 0
+    max_similarity = 0  
     probable_disease = None
 
     for i, row in symptom_data.iterrows():
