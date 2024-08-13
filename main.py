@@ -43,13 +43,13 @@ def index():
             probable_disease = match_symptoms(input_symptoms)
             if probable_disease:
                 remedy = get_medicine(probable_disease)
-                return render_template('main.html', disease=probable_disease, remedy=remedy)
+                return render_template('index.html', disease=probable_disease, remedy=remedy)
             else:
-                return render_template('main.html', error="No matching disease found.")
+                return render_template('index.html', error="No matching disease found.")
         else:
-            return render_template('main.html', error="Please enter symptoms.")
+            return render_template('index.html', error="Please enter symptoms.")
 
-    return render_template('main.html')
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=False)
