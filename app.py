@@ -9,9 +9,11 @@ app = Flask(__name__)
 symptom_data = pd.read_csv('output.csv')
 medicine_data = pd.read_csv('medicine.csv')
 
+# Initialize the vectorizer
+vectorizer = CountVectorizer().fit(symptom_data.columns[1:])
+
 # Function to match symptoms and predict the most probable disease
 def match_symptoms(input_symptoms):
-    vectorizer = CountVectorizer().fit(symptom_data.columns[1:])
     symptom_vector = vectorizer.transform([input_symptoms])
     max_similarity = 0  
     probable_disease = None
@@ -19,7 +21,7 @@ def match_symptoms(input_symptoms):
     for i, row in symptom_data.iterrows():
         disease_symptoms = " ".join([symptom for symptom in symptom_data.columns[1:] if row[symptom] == 'yes'])
         disease_vector = vectorizer.transform([disease_symptoms])
-        similarity = cosine_similarity(symptom_vector, disease_vector)
+        similarity = cosine_similarity(symptom_vector, disease_vector)[0][0]
         if similarity > max_similarity:
             max_similarity = similarity
             probable_disease = row['Disease']
