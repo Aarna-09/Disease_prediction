@@ -37,7 +37,7 @@ def get_medicine(disease):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        input_symptoms = request.form.get('symptoms')
+        input_symptoms = request.form.get('symptoms')    
         
         if input_symptoms:
             probable_disease = match_symptoms(input_symptoms)
